@@ -5,7 +5,7 @@
 *.*~
 *.log
 *.log.*
-.env
+*.env
 pikachu/local_settings.py
 media/*
 assets/*
@@ -14,10 +14,11 @@ assets/*
 .\#*
 .dirlocals.el
 venv/*
+env/
+!.env.dev
 .elasticbeanstalk/
 .vscode/settings.json
 .pytest_cache/
-!.env.dev
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
