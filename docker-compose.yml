@@ -16,7 +16,7 @@ services:
         - postgres_data:/var/lib/postgresql/data/
         environment:
         - POSTGRES_USER=merlin
-        - POSTGRES_PASSWORD=merlin_pass
+        - POSTGRES_PASSWORD=merlin
         - POSTGRES_DB=merlin_dev
 
 volumes:

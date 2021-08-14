@@ -2,8 +2,8 @@
 FROM python:3.8.5
 
 # set work directory
-RUN mkdir /code
-WORKDIR /code
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -16,7 +16,8 @@ RUN apt-get update \
     postgresql-server-dev-all \
     gcc \
     python3-dev \
-    musl-dev
+    musl-dev \
+    netcat 
 
 # install dependencies
 RUN pip install --upgrade pip
@@ -27,6 +28,6 @@ RUN pip install -r requirements.txt
 COPY ./merlin/entrypoint.sh .
 
 # copy project
-COPY . /code/
+COPY . .
 
-# ENTRYPOINT [":/code/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
