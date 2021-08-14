@@ -14,8 +14,9 @@ assets/*
 .\#*
 .dirlocals.el
 venv/*
-env/
-!.env.dev
+!emv/.env.dev
+.env.prod
+.env.prod.db
 .elasticbeanstalk/
 .vscode/settings.json
 .pytest_cache/
