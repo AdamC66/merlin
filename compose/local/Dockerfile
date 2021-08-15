@@ -27,10 +27,6 @@ RUN pip install -r requirements.txt
 # copy entrypoint.sh
 COPY ./merlin/entrypoint.sh .
 
-COPY ./merlin/flower_start /flower_start
-RUN sed -i 's/\r$//g' /flower_start
-RUN chmod +x /flower_start
-
 # copy project
 COPY . .
 
