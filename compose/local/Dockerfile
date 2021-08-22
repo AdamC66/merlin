@@ -1,6 +1,6 @@
 # pull official base image
 FROM python:3.8.5
-
+ENV APP_HOME=/home/app/web
 # set work directory
 # RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
@@ -29,5 +29,3 @@ COPY ./merlin/entrypoint.sh .
 
 # copy project
 COPY . .
-
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
