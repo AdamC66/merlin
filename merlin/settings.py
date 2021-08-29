@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "djoser",
+    "knox",
     'upload',
     'merlin_user'
 ]
@@ -143,3 +145,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BACKEND", "redis://127.0.0.1:6379/0")
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
+
+DJOSER = {
+    "LOGIN_FIELD": 'email', 
+    'activation': 'djoser.serializers.ActivationSerializer',
+    'password_reset': 'djoser.serializers.SendEmailResetSerializer',
+    'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',
+    'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',
+    'set_password': 'djoser.serializers.SetPasswordSerializer',
+    'set_password_retype': 'djoser.serializers.SetPasswordRetypeSerializer',
+    'set_username': 'djoser.serializers.SetUsernameSerializer',
+    'set_username_retype': 'djoser.serializers.SetUsernameRetypeSerializer',
+    'username_reset': 'djoser.serializers.SendEmailResetSerializer',
+    'username_reset_confirm': 'djoser.serializers.UsernameResetConfirmSerializer',
+    'username_reset_confirm_retype': 'djoser.serializers.UsernameResetConfirmRetypeSerializer',
+    'user_create': 'djoser.serializers.UserCreateSerializer',
+    'user_create_password_retype': 'djoser.serializers.UserCreatePasswordRetypeSerializer',
+    'user_delete': 'djoser.serializers.UserDeleteSerializer',
+    'user': 'djoser.serializers.UserSerializer',
+    'current_user': 'djoser.serializers.UserSerializer',
+    'token': 'knox.serializers.UserSerializer',
+    'token_create': 'djoser.serializers.TokenCreateSerializer',
+    "TOKEN_MODEL": 'knox.models.AuthToken',
+    'SERIALIZERS': {"token": "merlin_user.rest.serializers.TokenSerializer"},
+}
