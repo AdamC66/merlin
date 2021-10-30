@@ -26,12 +26,15 @@ urlpatterns = [
     path("", image_upload, name="upload"),
     path('auth/login/', LoginView.as_view(), name='knox_login'),
     path('auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
-    path('auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
+    path('auth/logoutall/', knox_views.LogoutAllView.as_view(),
+         name='knox_logoutall'),
     path('admin/', admin.site.urls),
     path('api/v1/', include('apps.merlin_user.rest.urls')),
+    path('heartbeat/', include('apps.common.rest.urls')),
     path('api/', include('rest_framework.urls')),
 
 ]
 
 if bool(settings.DEBUG):
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
