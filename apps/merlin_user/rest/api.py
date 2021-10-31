@@ -18,22 +18,12 @@ class LoginView(KnoxLoginView):
         user = serializer.validated_data['user']
         login(request, user)
         return super(LoginView, self).post(request, format=None)
+
 class MerlinUserViewSet(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated,]
     queryset = MerlinUser.objects.all()
-    lookup_field = "code"
-    lookup_url_kwarg = "user_code"
-    def retrieve(self, request, *args, **kwargs):
-        instance=self.get_object()
-        serializer = UserDetailSerializer(instance=instance)
-        return Response(serializer.data)
-
-    def list(self, request, *args, **kwargs):
-        queryset=self.get_queryset()
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
     
     def get(self, request, *args, **kwargs):
-        if self.lookup_url_kwarg in kwargs:
-            return self.retrieve(request, *args, **kwargs)
-        return self.list(request, *args, **kwargs)
+        user=request.user
+        serializer = UserDetailSerializer(instance=user)
+        return Response(serializer.data)
