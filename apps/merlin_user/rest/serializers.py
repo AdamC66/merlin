@@ -39,3 +39,19 @@ class TokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthToken
         fields = ("auth_token",)
+
+class CreateUserSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=30, required=True)
+    password = serializers.CharField(max_length=30, required=True)
+    confirm_password = serializers.CharField(max_length=30, required=True)
+    email = serializers.EmailField(max_length=255, required=True)
+
+    def validate(self, attrs):
+        password = attrs.get("password")
+        confirm_password = attrs.get("confirm_password")
+        if len(password) < 5 or len(confirm_password) < 5:
+            raise serializers.ValidationError({"password": "Password must be at least 6 characters long"})
+        if password != confirm_password:
+            raise serializers.ValidationError({"confirm_password": "Passwords must match"})
+            
+        return super().validate(attrs)

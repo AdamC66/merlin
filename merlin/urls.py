@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.merlin_user.rest.api import LoginView
+from apps.merlin_user.rest.api import LoginView, RegistrationView
 from django.conf import settings
 from django.conf.urls.static import static
 from knox import views as knox_views
@@ -25,6 +25,7 @@ from apps.upload.views import image_upload
 urlpatterns = [
     path("", image_upload, name="upload"),
     path('auth/login/', LoginView.as_view(), name='knox_login'),
+    path('auth/register/', RegistrationView.as_view(), name='knox_register'),
     path('auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
     path('auth/logoutall/', knox_views.LogoutAllView.as_view(),
          name='knox_logoutall'),
